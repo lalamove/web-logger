@@ -1,0 +1,13 @@
+{
+  "name": "llm-web-logger",
+  "version": "0.1.1",
+  "description": "A logger Javascript SDK for Lalamove web project.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "github:andrewmmc/llm-web-logger",
+  "keywords": ["logger"],
+  "author": "Andrew Mok <andrew.mok@lalamove.com>",
+  "license": "MIT"
+}
