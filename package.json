@@ -2,7 +2,7 @@
   "name": "llm-web-logger",
   "version": "0.1.1",
   "description": "A logger Javascript SDK for Lalamove web project.",
-  "main": "index.js",
+  "main": "llm-web-logger.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

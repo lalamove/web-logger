@@ -5,7 +5,7 @@ Logging front-end errors / custom log to logging services, based on Lalamove k8s
 
 ## Install
 ```
-yarn add web-logger
+yarn add llm-web-logger
 ```
 
 ## Usage
@@ -33,11 +33,11 @@ Logger.info('message', { data: 'custom data' });
 
 ### Old-school way
 ```
-<script src="./llm-web-logger.min.js"></script>
+<script src="./llm-web-logger.js"></script>
 <script>
 var Logger = logger({
-    url: '', // Logging services URL
-    credential: '', // Credential key, required
+    url: '', // Logging services URL, required
+    credential: 'API_KEY', // Credential key, required
     release: '1', // Version, required
     locale: 'zh_HK', // required
     location: 'HK_HKG', // required
