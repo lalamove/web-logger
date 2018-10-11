@@ -110,9 +110,8 @@ class Logger {
     }
   }
 
-  _handleOnError(message, file, line, col, err) {
-    return this._logger(LEVEL_ERROR)(message, file, line, col, err);
-  }
+  _handleOnError = (message, file, line, col, err) =>
+    this._logger(LEVEL_ERROR)(message, file, line, col, err);
 
   changeLocation(location = defaultConfig.location) {
     this._config.location = location;
