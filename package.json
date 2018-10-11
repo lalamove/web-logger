@@ -3,6 +3,9 @@
   "version": "0.2.0",
   "description": "A logger Javascript SDK for Lalamove web project.",
   "main": "dist/index.js",
+  "module": "dist/index.es.js",
+  "iife": "dist/index.iife.js",
+  "jsnext:main": "dist/index.es.js",
   "scripts": {
     "test": "jest",
     "build": "rollup -c",
@@ -21,6 +24,8 @@
     "jest": "^23.6.0",
     "rollup": "^0.66.4",
     "rollup-plugin-babel": "3",
+    "rollup-plugin-babel-minify": "^6.1.1",
+    "rollup-plugin-commonjs": "^9.2.0",
     "rollup-watch": "^4.3.1"
   },
   "dependencies": {}

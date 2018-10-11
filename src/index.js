@@ -96,7 +96,11 @@ function logger(level) {
   }
 }
 
-class WebLogger {
+function handleOnError(message, file, line, col, err) {
+  return logger(LEVEL_ERROR)(message, file, line, col, err);
+}
+
+class Logger {
   constructor(config = defaultConfig) {
     if (!config.url || !config.credential || !config.release || !config.locale ||
       !config.location || !config.environment || !config.platform) {
@@ -104,6 +108,7 @@ class WebLogger {
         ' for the usage.');
     }
     this._config = config;
+    if (window) window.onerror = handleOnError;
   }
 
   changeLocation(location = defaultConfig.location) {
@@ -126,4 +131,4 @@ class WebLogger {
     logger(LEVEL_FATAL)(message, null, null, null, null, context);
 }
 
-export default WebLogger;
+export default Logger;
