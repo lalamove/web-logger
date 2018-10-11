@@ -106,6 +106,14 @@ class WebLogger {
     this._config = config;
   }
 
+  changeLocation(location = defaultConfig.location) {
+    this._config.location = location;
+  }
+
+  changeLocale(locale = defaultConfig.locale) {
+    this._config.locale = locale;
+  }
+
   info = (message, context) =>
     logger(LEVEL_INFO)(message, null, null, null, null, context);
   debug = (message, context) =>
