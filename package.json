@@ -1,6 +1,6 @@
 {
   "name": "llm-web-logger",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "A logger Javascript SDK for Lalamove web project.",
   "main": "dist/index.js",
   "scripts": {
@@ -23,7 +23,5 @@
     "rollup-plugin-babel": "3",
     "rollup-watch": "^4.3.1"
   },
-  "dependencies": {
-    "whatwg-fetch": "^3.0.0"
-  }
+  "dependencies": {}
 }

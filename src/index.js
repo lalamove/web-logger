@@ -1,5 +1,3 @@
-import 'whatwg-fetch';
-
 'use strict';
 const LEVEL_INFO = 'info';
 const LEVEL_DEBUG = 'debug';
@@ -20,8 +18,7 @@ const defaultConfig = {
 function traceError() {
   const e = new Error();
   if (!e.stack) try {
-    // IE requires the Error to actually be throw or else the Error's 'stack'
-    // property is undefined.
+    // IE requires the Error to actually be throw or else the Error's 'stack' property is undefined.
     throw e;
   } catch (e) {
     if (!e.stack) {
