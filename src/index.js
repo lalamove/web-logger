@@ -7,7 +7,7 @@ const LEVEL_FATAL = 'fatal';
 
 const defaultConfig = {
   url: null,
-  credential: null,
+  key: null,
   release: null,
   locale: null,
   location: null,
@@ -40,7 +40,7 @@ async function post(data) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json; charset=utf-8',
-        'Authorization': `Basic ${this._config.credential}`,
+        'Authorization': `Basic ${this._config.key}`,
       },
       body: JSON.stringify(data),
     });
@@ -102,7 +102,7 @@ function handleOnError(message, file, line, col, err) {
 
 class Logger {
   constructor(config = defaultConfig) {
-    if (!config.url || !config.credential || !config.release || !config.locale ||
+    if (!config.url || !config.key || !config.release || !config.locale ||
       !config.location || !config.environment || !config.platform) {
       throw new Error('[lalamove-web-logger] Missing configuration. Please check documentation' +
         ' for the usage.');
