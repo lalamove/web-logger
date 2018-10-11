@@ -27,9 +27,9 @@ export default {
       exclude: 'node_modules/**',
     }),
     commonjs(),
-    minify({
-      comments: false,
-      sourceMap: false,
-    }),
+    // minify({
+    //   comments: false,
+    //   sourceMap: false,
+    // }),
   ],
 };
