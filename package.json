@@ -2,12 +2,28 @@
   "name": "llm-web-logger",
   "version": "0.1.1",
   "description": "A logger Javascript SDK for Lalamove web project.",
-  "main": "llm-web-logger.js",
+  "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest",
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
+    "prepare": "npm run build"
   },
   "repository": "github:andrewmmc/llm-web-logger",
-  "keywords": ["logger"],
+  "keywords": [
+    "logger"
+  ],
   "author": "Andrew Mok <andrew.mok@lalamove.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-stage-2": "^6.24.1",
+    "jest": "^23.6.0",
+    "rollup": "^0.66.4",
+    "rollup-plugin-babel": "3",
+    "rollup-watch": "^4.3.1"
+  },
+  "dependencies": {
+    "whatwg-fetch": "^3.0.0"
+  }
 }
