@@ -93,7 +93,7 @@ class Logger {
         message,
         time: new Date().toISOString(),
         src_file: sourceFile,
-        src_line: sourceLine,
+        src_line: sourceLine.toString(),
         context: {
           ...context,
           release: this._config.release,
