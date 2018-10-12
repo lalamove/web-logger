@@ -16,7 +16,6 @@
   "author": "Andrew Mok <andrew.mok@lalamove.com>",
   "license": "MIT",
   "devDependencies": {
-    "@babel/polyfill": "^7.0.0",
     "babel-core": "^6.26.3",
     "babel-eslint": "^8.2.1",
     "babel-preset-env": "^1.6.0",
