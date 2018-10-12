@@ -1,32 +1,39 @@
 {
-  "name": "llm-web-logger",
-  "version": "0.2.0",
+  "name": "lalamove-web-logger",
+  "version": "0.3.0",
   "description": "A logger Javascript SDK for Lalamove web project.",
+  "private": true,
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "iife": "dist/index.iife.js",
   "jsnext:main": "dist/index.es.js",
   "scripts": {
-    "test": "jest",
+    "start": "rollup -c -w",
     "build": "rollup -c",
-    "dev": "rollup -c -w",
-    "prepare": "npm run build"
+    "prepare": "npm run build",
+    "precommit": "npm run prepare"
   },
-  "repository": "github:andrewmmc/llm-web-logger",
-  "keywords": [
-    "logger"
-  ],
   "author": "Andrew Mok <andrew.mok@lalamove.com>",
   "license": "MIT",
   "devDependencies": {
-    "babel-preset-env": "^1.7.0",
+    "@babel/polyfill": "^7.0.0",
+    "babel-core": "^6.26.3",
+    "babel-eslint": "^8.2.1",
+    "babel-preset-env": "^1.6.0",
     "babel-preset-stage-2": "^6.24.1",
-    "jest": "^23.6.0",
-    "rollup": "^0.66.4",
-    "rollup-plugin-babel": "3",
-    "rollup-plugin-babel-minify": "^6.1.1",
-    "rollup-plugin-commonjs": "^9.2.0",
-    "rollup-watch": "^4.3.1"
+    "cross-env": "^5.1.4",
+    "husky": "^0.14.3",
+    "rollup": "^0.54.0",
+    "rollup-plugin-alias": "^1.4.0",
+    "rollup-plugin-babel": "^3.0.3",
+    "rollup-plugin-babel-minify": "^6.0.0",
+    "rollup-plugin-commonjs": "^8.2.1",
+    "rollup-plugin-node-resolve": "^3.0.2",
+    "rollup-plugin-peer-deps-external": "^2.0.0",
+    "rollup-plugin-url": "^1.3.0"
   },
+  "files": [
+    "dist"
+  ],
   "dependencies": {}
 }

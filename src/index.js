@@ -1,4 +1,5 @@
-'use strict';
+import "@babel/polyfill";
+
 const LEVEL_INFO = 'info';
 const LEVEL_DEBUG = 'debug';
 const LEVEL_WARNING = 'warning';

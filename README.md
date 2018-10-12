@@ -1,34 +1,35 @@
-# llm-web-logger
-v0.1.1 (Work in progress)
+# lalamove-web-logger
+v0.3.0
 
 A logger Javascript SDK to log client side errors / logs to custom logging services, based on Lalamove's logging format.
 
 ## Install
 ```
-yarn add llm-web-logger
+
 ```
 
 ## Usage
 ### Modules
 ```
-import WebLogger from 'llm-web-logger';
+import Logger from 'lalamove-web-logger';
 
 // Init config
-const Logger = WebLogger({
-    url: '', // Logging services URL, required
-    credential: 'API_KEY', // Credential key, required
+const log = new Logger({
+    url: 'https://log.dev.lalamove.com', // Logging services URL, required
+    key: 'API_KEY', // Credential key, required
     release: '2.0.0', // Product version, required
     locale: 'zh_HK', // required
     location: 'HK_HKG', // required
-    environment: 'test', // Server environment, required
+    environment: 'test', // Environment, required
     platform: 'webapp' // required
 });
 
-// Will auto catch error to logging services after init
+// Will auto catch error (window.onerror) to logging services after init
 
-// Log debug/info/warning/error/fatal
-Logger.info('message');
-Logger.info('message', { data: 'custom data' });
+// Custom log, debug/info/warning/error/fatal
+log.debug('message');
+log.info('message');
+log.info('message', { data: 'custom data' });
 ```
 ### React error boundaries
 ```
@@ -36,24 +37,25 @@ Logger.info('message', { data: 'custom data' });
 
 ### Old-school way
 ```
-<script src="./llm-web-logger.js"></script>
+<script src="(use iife version, will be provided later)"></script>
 <script>
 // Init config
-var Logger = logger({
-    url: '', // Logging services URL, required
-    credential: 'API_KEY', // Credential key, required
+var log = Logger({
+    url: 'https://log.dev.lalamove.com', // Logging services URL, required
+    key: 'API_KEY', // Credential key, required
     release: '2.0.0', // Product version, required
     locale: 'zh_HK', // required
     location: 'HK_HKG', // required
-    environment: 'test', // Server environment, required
+    environment: 'test', // Environment, required
     platform: 'webapp' // required
 })
 
-// Will auto catch error to logging services after init
+// Will auto catch error (window.onerror) to logging services after init
 
-// Log debug/info/warning/error/fatal
-Logger.info('message');
-Logger.info('message', { data: 'custom data' });
+// Custom log, debug/info/warning/error/fatal
+log.debug('message');
+log.info('message');
+log.info('message', { data: 'custom data' });
 </script>
 ```
 
@@ -82,7 +84,6 @@ The output of the log will be posted to the logging services in the JSON format 
 ```
 ## Todo
 * Tests and test coverage
-* Files minify
 * Usage / Examples
 * .....
 

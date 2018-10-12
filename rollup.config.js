@@ -1,6 +1,6 @@
 import babel from 'rollup-plugin-babel';
 import commonjs from 'rollup-plugin-commonjs';
-import minify from 'rollup-plugin-babel-minify';
+import resolve from 'rollup-plugin-node-resolve';
 
 import pkg from './package.json';
 
@@ -8,7 +8,6 @@ export default {
   input: 'src/index.js',
   output: [
     {
-      name: 'Logger',
       file: pkg.main,
       format: 'cjs',
     },
@@ -26,10 +25,9 @@ export default {
     babel({
       exclude: 'node_modules/**',
     }),
-    commonjs(),
-    // minify({
-    //   comments: false,
-    //   sourceMap: false,
-    // }),
+    commonjs({
+      include: 'node_modules/**',
+    }),
+    resolve(),
   ],
 };

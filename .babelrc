@@ -1,7 +1,12 @@
 {
   "presets": [
     ["env", {
-      "modules": false
+      "modules": false,
+      "targets": {
+        "ie": 11,
+        "safari": 9,
+        "browsers": "last 2 versions"
+      }
     }],
     "stage-2"
   ]
