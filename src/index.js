@@ -71,7 +71,7 @@ class Logger {
         const stack = traceError();
         sourceFile = stack.file || 'unknown';
         sourceLine = stack.line || 0;
-        backtrace = stack.backtrace || 'unknown';
+        if (!backtrace) backtrace = stack.backtrace || 'unknown';
       }
       if (!message) message = 'unknown';
 
@@ -126,10 +126,10 @@ class Logger {
     this._logger(LEVEL_DEBUG)(message, null, null, null, null, context);
   warning = (message, context) =>
     this._logger(LEVEL_WARNING)(message, null, null, null, null, context);
-  error = (message, context) =>
-    this._logger(LEVEL_ERROR)(message, null, null, null, null, context);
-  fatal = (message, context) =>
-    this._logger(LEVEL_FATAL)(message, null, null, null, null, context);
+  error = (message, context, errStack) =>
+    this._logger(LEVEL_ERROR)(message, null, null, null, { stack: errStack }, context);
+  fatal = (message, context, errStack) =>
+    this._logger(LEVEL_FATAL)(message, null, null, null, { stack: errStack }, context);
 }
 
 export default Logger;
