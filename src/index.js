@@ -55,6 +55,7 @@ class Logger {
         },
         body: JSON.stringify(data),
       });
+      console.log(this._config.url);
       if (!response.ok) throw new Error('Unhandled error');
       if (response.contentType === 'application/json') return response.json();
       return response.text();
@@ -63,51 +64,50 @@ class Logger {
     }
   }
 
-  _logger(level) {
-    return (message, file, line, col, err, context) => {
-      let [sourceFile, sourceLine] = [file, line];
-      let backtrace = err && err.stack;
-      if (!sourceFile && !sourceLine) {
-        const stack = traceError();
-        sourceFile = stack.file || 'unknown';
-        sourceLine = stack.line || 0;
-        if (!backtrace) backtrace = stack.backtrace || 'unknown';
-      }
-      if (!message) message = 'unknown';
-
-      switch (level) {
-        case LEVEL_WARNING:
-          console.warn(`[${level}] ${message}`);
-          break;
-        case LEVEL_ERROR:
-        case LEVEL_FATAL:
-          console.error(`[${level}] ${message}`);
-          break;
-        default:
-          console.log(`[${level}] ${message}`);
-      }
-
-      const data = {
-        level,
-        message,
-        time: new Date().toISOString(),
-        src_file: sourceFile,
-        src_line: sourceLine.toString(),
-        context: {
-          ...context,
-          release: this._config.release,
-          locale: this._config.locale,
-          location: this._config.location,
-          environment: this._config.environment,
-          platform: this._config.platform,
-          agent: (navigator && navigator.userAgent) ? navigator.userAgent : 'unknown',
-        },
-        backtrace,
-      };
-
-      this._post(data);
+  _logger = (level) => (message, file, line, col, err, context) => {
+    let [sourceFile, sourceLine] = [file, line];
+    let backtrace = err && err.stack;
+    if (!sourceFile && !sourceLine) {
+      const stack = traceError();
+      sourceFile = stack.file || 'unknown';
+      sourceLine = stack.line || 0;
+      if (!backtrace) backtrace = stack.backtrace || 'unknown';
     }
-  }
+    if (!message) message = 'unknown';
+
+    switch (level) {
+      case LEVEL_WARNING:
+        console.warn(`[${level}] ${message}`);
+        break;
+      case LEVEL_ERROR:
+      case LEVEL_FATAL:
+        console.error(`[${level}] ${message}`);
+        break;
+      default:
+        console.log(`[${level}] ${message}`);
+    }
+
+    const data = {
+      level,
+      message,
+      time: new Date().toISOString(),
+      src_file: sourceFile,
+      src_line: sourceLine.toString(),
+      context: {
+        ...context,
+        release: this._config.release,
+        locale: this._config.locale,
+        location: this._config.location,
+        environment: this._config.environment,
+        platform: this._config.platform,
+        agent: (navigator && navigator.userAgent) ? navigator.userAgent : 'unknown',
+      },
+      backtrace,
+    };
+
+    this._post(data);
+    return true;
+  };
 
   _handleOnError = (message, file, line, col, err) =>
     this._logger(LEVEL_ERROR)(message, file, line, col, err);

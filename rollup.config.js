@@ -23,6 +23,7 @@ export default {
   ],
   plugins: [
     babel({
+      runtimeHelpers: true,
       exclude: 'node_modules/**',
     }),
     commonjs({

@@ -1,11 +1,16 @@
 # lalamove-web-logger
-v0.3.0
+v0.4.0
 
 A logger Javascript SDK to log client side errors / logs to custom logging services, based on Lalamove's logging format.
 
 ## Install
+```bash
+
 ```
 
+## Run Tests
+```bash
+yarn test
 ```
 
 ## Usage
@@ -82,11 +87,6 @@ The output of the log will be posted to the logging services in the JSON format 
     "backtrace": "" // Error stack
 }
 ```
-## Todo
-* Tests and test coverage
-* Usage / Examples
-* .....
-
 ## License
 - [MIT License](LICENSE.md)
 
