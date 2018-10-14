@@ -13,7 +13,7 @@
     "prepare": "npm run build",
     "test": "jest",
     "test-coverage": "jest --coverage",
-    "coveralls": "jest --coverage && cat ./tests/coverage/lcov.info | coveralls",
+    "coveralls": "jest --coverage --coverageReporters=text-lcov | coveralls",
     "precommit": "npm run prepare"
   },
   "author": "Andrew Mok <andrew.mok@lalamove.com>",
@@ -25,6 +25,7 @@
     "babel-preset-env": "^1.6.0",
     "babel-preset-stage-2": "^6.24.1",
     "babel-register": "^6.26.0",
+    "coveralls": "^3.0.2",
     "cross-env": "^5.1.4",
     "fetch-mock": "^7.0.7",
     "husky": "^0.14.3",
