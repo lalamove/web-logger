@@ -13,6 +13,7 @@
     "prepare": "npm run build",
     "test": "jest",
     "test-coverage": "jest --coverage",
+    "coveralls": "jest --coverage && cat ./tests/coverage/lcov.info | coveralls",
     "precommit": "npm run prepare"
   },
   "author": "Andrew Mok <andrew.mok@lalamove.com>",
