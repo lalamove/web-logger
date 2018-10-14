@@ -11,7 +11,8 @@
     "start": "rollup -c -w",
     "build": "rollup -c",
     "prepare": "npm run build",
-    "test": "jest --coverage",
+    "test": "jest",
+    "test-coverage": "jest --coverage",
     "precommit": "npm run prepare"
   },
   "author": "Andrew Mok <andrew.mok@lalamove.com>",
