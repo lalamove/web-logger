@@ -14,23 +14,31 @@
     "test": "jest",
     "test-coverage": "jest --coverage",
     "coveralls": "jest --coverage --coverageReporters=text-lcov | coveralls",
-    "precommit": "npm run prepare"
+    "lint": "eslint --fix \"src/**/*.js\"",
+    "precommit": "npm run prepare && lint-staged"
   },
   "author": "Andrew Mok <andrew.mok@lalamove.com>",
   "license": "MIT",
   "devDependencies": {
     "babel-core": "^6.26.3",
-    "babel-eslint": "^8.2.1",
+    "babel-eslint": "^10.0.1",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.6.0",
     "babel-preset-stage-2": "^6.24.1",
     "babel-register": "^6.26.0",
     "coveralls": "^3.0.2",
     "cross-env": "^5.1.4",
+    "eslint": "^5.3.0",
+    "eslint-config-airbnb-base": "13.1.0",
+    "eslint-config-prettier": "^3.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-prettier": "^3.0.0",
     "fetch-mock": "^7.0.7",
     "husky": "^0.14.3",
     "jest": "^23.6.0",
+    "lint-staged": "^7.3.0",
     "node-fetch": "^2.2.0",
+    "prettier": "^1.14.3",
     "rollup": "^0.54.0",
     "rollup-plugin-alias": "^1.4.0",
     "rollup-plugin-babel": "^3.0.3",
@@ -43,5 +51,18 @@
   "files": [
     "dist"
   ],
-  "dependencies": {}
+  "lint-staged": {
+    "src/**/*.js": [
+      "prettier --write",
+      "eslint --fix",
+      "git add"
+    ]
+  },
+  "dependencies": {},
+  "jest": {
+    "coverageReporters": [
+      "json",
+      "html"
+    ]
+  }
 }

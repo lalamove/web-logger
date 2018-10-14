@@ -11,55 +11,57 @@ const defaultConfig = {
   locale: null,
   location: null,
   environment: null,
-  platform: null,
+  platform: null
 };
 
 function traceError(e = new Error()) {
-  if (!e.stack) try {
-    // IE requires the Error to actually be throw or else the Error's 'stack' property is undefined.
-    throw e;
-  } catch (e) {
-    if (!e.stack) {
-      // IE < 10
-      return {
-        filename: undefined,
-        line: undefined,
-        column: undefined,
-        backtrace: undefined,
-      };
-    }
-  }
+  // For Internet Explorer only
+  if (!e.stack)
+    return {
+      file: undefined,
+      line: undefined,
+      column: undefined,
+      backtrace: undefined
+    };
 
   const backtrace = e.stack.toString();
   const stack = backtrace.split(/\r\n|\n/);
   const regex = /(http.*):(\d+):(\d+)/;
   const frame = stack.find(msg => regex.test(msg));
-  if (!frame) return {
-    filename: undefined,
-    line: undefined,
-    column: undefined,
-    backtrace: undefined,
-  };
-  const [_, file, line, column] = regex.exec(frame);
+  if (!frame)
+    return {
+      file: undefined,
+      line: undefined,
+      column: undefined,
+      backtrace: undefined
+    };
+  const [_, file, line, column] = regex.exec(frame); // eslint-disable-line no-unused-vars
   return {
     file,
     line,
     column,
-    backtrace,
+    backtrace
   };
 }
 
 class Logger {
   constructor(config = defaultConfig) {
-    if (!config.url || !config.key || !config.release || !config.locale ||
-      !config.location || !config.environment || !config.platform) {
-      throw new Error('[lalamove-web-logger] Missing configuration. Please check documentation' +
-        ' for the usage.');
+    if (
+      !config.url ||
+      !config.key ||
+      !config.release ||
+      !config.locale ||
+      !config.location ||
+      !config.environment ||
+      !config.platform
+    ) {
+      throw new Error(
+        '[lalamove-web-logger] Missing configuration. Please check documentation' +
+          ' for the usage.'
+      );
     }
     this._config = config;
-    if (window) {
-      window.onerror = this._handleOnError;
-    }
+    window.onerror = this._handleOnError;
   }
 
   async _post(data) {
@@ -68,9 +70,9 @@ class Logger {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json; charset=utf-8',
-          'Authorization': `Basic ${this._config.key}`,
+          Authorization: `Basic ${this._config.key}`
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify(data)
       });
 
       if (!response.ok) {
@@ -80,10 +82,11 @@ class Logger {
       return response;
     } catch (e) {
       console.error(e);
+      return false;
     }
   }
 
-  _logger = (level) => (message, file, line, col, err, context) => {
+  _logger = level => (message, file, line, col, err, context) => {
     let [sourceFile, sourceLine] = [file, line];
     let backtrace = err && err.stack;
 
@@ -125,9 +128,9 @@ class Logger {
         location: this._config.location,
         environment: this._config.environment,
         platform: this._config.platform,
-        agent: navigator && navigator.userAgent,
+        agent: navigator && navigator.userAgent
       },
-      backtrace,
+      backtrace
     };
 
     this._post(data);
@@ -155,10 +158,24 @@ class Logger {
     this._logger(LEVEL_WARNING)(message, null, null, null, null, context);
 
   error = (message, context, errStack) =>
-    this._logger(LEVEL_ERROR)(message, null, null, null, { stack: errStack }, context);
+    this._logger(LEVEL_ERROR)(
+      message,
+      null,
+      null,
+      null,
+      { stack: errStack },
+      context
+    );
 
   fatal = (message, context, errStack) =>
-    this._logger(LEVEL_FATAL)(message, null, null, null, { stack: errStack }, context);
+    this._logger(LEVEL_FATAL)(
+      message,
+      null,
+      null,
+      null,
+      { stack: errStack },
+      context
+    );
 }
 
 export { Logger as default, traceError };

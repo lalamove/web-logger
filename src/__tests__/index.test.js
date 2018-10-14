@@ -1,5 +1,5 @@
 import fetchMock from 'fetch-mock';
-import Logger, { traceError } from '../src/index';
+import Logger, { traceError } from '../index';
 
 const config = {
   url: 'https://log.dev.lalamove.com/',
@@ -8,7 +8,7 @@ const config = {
   locale: 'en_HK',
   location: 'HK_HKG',
   environment: 'dev',
-  platform: 'webapp',
+  platform: 'webapp'
 };
 
 describe('lalamove-web-logger tests', () => {
@@ -16,24 +16,15 @@ describe('lalamove-web-logger tests', () => {
 
   describe('initialized Logger with config', () => {
     beforeAll(() => {
-      fetchMock
-        .mock(
-          (
-            url,
-            { headers }) => url === config.url && headers.Authorization === `Basic ${config.key}`,
-          200);
-    });
-
-    afterAll(() => {
-      // runs after all tests in this block
+      fetchMock.mock(
+        (url, { headers }) =>
+          url === config.url && headers.Authorization === `Basic ${config.key}`,
+        200
+      );
     });
 
     beforeEach(() => {
       log = new Logger(config);
-    });
-
-    afterEach(() => {
-      // runs after each test in this block
     });
 
     test('should init default config', () => {
@@ -53,6 +44,15 @@ describe('lalamove-web-logger tests', () => {
     test('should log message as info level', () => {
       console.log = jest.fn();
       const result = log.info('testing message');
+      expect(console.log).toHaveBeenCalledWith('[info] testing message');
+      expect(console.log).toHaveBeenCalledTimes(1);
+      expect(result).toBe(true);
+      console.log.mockClear();
+    });
+
+    test('should log message as info level with custom context', () => {
+      console.log = jest.fn();
+      const result = log.info('testing message', { testing: 'testing' });
       expect(console.log).toHaveBeenCalledWith('[info] testing message');
       expect(console.log).toHaveBeenCalledTimes(1);
       expect(result).toBe(true);
@@ -86,6 +86,18 @@ describe('lalamove-web-logger tests', () => {
       console.error.mockClear();
     });
 
+    test('should log message as error level with backtrace', () => {
+      console.error = jest.fn();
+      const errorStack =
+        'Error: error message↵    at Home._this.render' +
+        ' (https://web.lalamove.com/static/js/bundle.js:1:1)';
+      const result = log.error('error message', null, errorStack);
+      expect(console.error).toHaveBeenCalledWith('[error] error message');
+      expect(console.error).toHaveBeenCalledTimes(1);
+      expect(result).toBe(true);
+      console.error.mockClear();
+    });
+
     test('should log message as fatal level', () => {
       console.error = jest.fn();
       const result = log.fatal('fatal message');
@@ -95,9 +107,23 @@ describe('lalamove-web-logger tests', () => {
       console.error.mockClear();
     });
 
+    test('should log message as fatal level with backtrace', () => {
+      console.error = jest.fn();
+      const errorStack =
+        'Error: error message↵    at Home._this.render' +
+        ' (https://web.lalamove.com/static/js/bundle.js:1:1)';
+      const result = log.fatal('fatal message', null, errorStack);
+      expect(console.error).toHaveBeenCalledWith('[fatal] fatal message');
+      expect(console.error).toHaveBeenCalledTimes(1);
+      expect(result).toBe(true);
+      console.error.mockClear();
+    });
+
     test('should call window.onerror', () => {
       console.error = jest.fn();
-      const result = window.onerror('error message', 'index.js', 1, 1, { stack: 'track stack' });
+      const result = window.onerror('error message', 'index.js', 1, 1, {
+        stack: 'track stack'
+      });
       expect(console.error).toHaveBeenCalledWith('[error] error message');
       expect(console.error).toHaveBeenCalledTimes(1);
       expect(result).toBe(true);
@@ -117,10 +143,11 @@ describe('lalamove-web-logger tests', () => {
     beforeAll(() => {
       fetchMock
         .mock(
-          (
-            url,
-            { headers }) => url === config.url && headers.Authorization === `Basic ${config.key}`,
-          200)
+          (url, { headers }) =>
+            url === config.url &&
+            headers.Authorization === `Basic ${config.key}`,
+          200
+        )
         .mock('*', 401);
     });
 
@@ -141,8 +168,10 @@ describe('lalamove-web-logger tests', () => {
     test('expected error to be throw', () => {
       expect(() => {
         log = new Logger();
-      }).toThrow('[lalamove-web-logger] Missing configuration. Please check documentation for' +
-        ' the usage.');
+      }).toThrow(
+        '[lalamove-web-logger] Missing configuration. Please check documentation for' +
+          ' the usage.'
+      );
     });
   });
 
@@ -150,7 +179,8 @@ describe('lalamove-web-logger tests', () => {
     test('expected to return file, line, column and backtrace', () => {
       const error = {
         message: 'error message',
-        stack: 'Error: error message↵    at Home._this.render' +
+        stack:
+          'Error: error message↵    at Home._this.render' +
           ' (https://web.lalamove.com/static/js/bundle.js:1:1)'
       };
       const result = traceError(error);
@@ -158,20 +188,20 @@ describe('lalamove-web-logger tests', () => {
         file: 'https://web.lalamove.com/static/js/bundle.js',
         line: '1',
         column: '1',
-        backtrace: error.stack,
+        backtrace: error.stack
       });
     });
 
-    test('expected to return undefined file, line, column and backtrace if IE < 10', () => {
+    test('expected to return undefined file, line, column and backtrace for IE', () => {
       const error = {
-        message: 'error message',
+        message: 'error message'
       };
       const result = traceError(error);
       expect(result).toEqual({
         file: undefined,
         line: undefined,
         column: undefined,
-        backtrace: undefined,
+        backtrace: undefined
       });
     });
   });

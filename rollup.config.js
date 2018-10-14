@@ -9,26 +9,26 @@ export default {
   output: [
     {
       file: pkg.main,
-      format: 'cjs',
+      format: 'cjs'
     },
     {
       file: pkg.module,
-      format: 'es',
+      format: 'es'
     },
     {
       name: 'Logger',
       file: pkg.iife,
-      format: 'iife',
-    },
+      format: 'iife'
+    }
   ],
   plugins: [
     babel({
       runtimeHelpers: true,
-      exclude: 'node_modules/**',
+      exclude: 'node_modules/**'
     }),
     commonjs({
-      include: 'node_modules/**',
+      include: 'node_modules/**'
     }),
-    resolve(),
-  ],
+    resolve()
+  ]
 };
