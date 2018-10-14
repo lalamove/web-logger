@@ -146,7 +146,7 @@ log.fatal('blahblahblah', { customKey: 'message' }, 'Error: error message↵ at 
 ### Log format
 
 The output of the log will be posted to the logging services in the JSON format below:
-```json
+```
 {
     "message": "", // Describing what happened
     "src_file": "", // File path

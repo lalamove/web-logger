@@ -4167,7 +4167,7 @@ rollup-plugin-alias@^1.4.0:
   dependencies:
     slash "^1.0.0"
 
-rollup-plugin-babel-minify@^6.0.0:
+rollup-plugin-babel-minify@^6.1.1:
   version "6.1.1"
   resolved "https://registry.yarnpkg.com/rollup-plugin-babel-minify/-/rollup-plugin-babel-minify-6.1.1.tgz#8fb568da0cc1ecd73e76f67c897055c21297cb81"
   dependencies:
