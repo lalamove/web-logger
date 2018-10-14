@@ -93,7 +93,7 @@ log.changeLocation('TW_TPE');
 #### changeLocale()
 Change locale in config.
 ```javascript
-log.changeLocale('TW_TPE');
+log.changeLocale('zh_TW');
 ```
 #### info()
 Custom info log.
