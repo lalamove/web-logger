@@ -1,4 +1,4 @@
-# lalamove-web-logger [![Build Status](https://travis-ci.org/andrewmmc/lalamove-web-logger.svg?branch=master)](https://travis-ci.org/andrewmmc/lalamove-web-logger) [![Coverage Status](https://coveralls.io/repos/github/andrewmmc/lalamove-web-logger/badge.svg?branch=master)](https://coveralls.io/github/andrewmmc/lalamove-web-logger?branch=master)
+# lalamove-web-logger [![Build Status](https://travis-ci.org/andrewmmc/lalamove-web-logger.svg?branch=master)](https://travis-ci.org/andrewmmc/lalamove-web-logger) [![Coverage Status](https://coveralls.io/repos/github/andrewmmc/lalamove-web-logger/badge.svg?branch=master&service=github)](https://coveralls.io/github/andrewmmc/lalamove-web-logger?branch=master)
 
 v0.4.0
 
