@@ -17,16 +17,16 @@ describe('traceError tests', () => {
     });
   });
 
-  test('expected to return undefined file, line, column and backtrace for IE', () => {
+  test('expected to return null file, line, column and backtrace for IE', () => {
     const error = {
       message: 'error message'
     };
     const result = traceError(error);
     expect(result).toEqual({
-      file: undefined,
-      line: undefined,
-      column: undefined,
-      backtrace: undefined
+      file: null,
+      line: null,
+      column: null,
+      backtrace: null
     });
   });
 });
