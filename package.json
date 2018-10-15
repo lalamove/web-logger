@@ -57,11 +57,5 @@
       "git add"
     ]
   },
-  "dependencies": {},
-  "jest": {
-    "coverageReporters": [
-      "json",
-      "html"
-    ]
-  }
+  "dependencies": {}
 }
