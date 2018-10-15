@@ -69,7 +69,7 @@ Your application should get the build from `node_modules/lalamove-web-logger/ind
 <script>
 // Init config
 // Will auto catch window.onerror to logging services after init
-var log = Logger({
+var log = new Logger({
     url: 'https://log.dev.lalamove.com', // Logging services URL, required
     key: 'API_KEY', // Credential key, required
     release: '2.0.0', // Product version, required
@@ -170,6 +170,13 @@ The output of the log will be posted to the logging services in the JSON format 
 ```bash
 yarn test
 ```
+
+## Browsers Support
+We use `window.fetch` to send out network request to custom logging services. If you would like to support [older browsers](https://caniuse.com/#search=fetch), you need to import [github/fetch](https://github.com/github/fetch) and [taylorhakes/promise-polyfill](https://github.com/taylorhakes/promise-polyfill).
+* Chrome
+* Firefox
+* Safari
+* Edge
 
 ## License
 - [MIT License](LICENSE.md)
