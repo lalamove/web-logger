@@ -58,16 +58,15 @@ class Logger {
     }
   }
 
-  _logger = level => (message, file, line, col, err, context) => {
+  _logger = (level, { message, file, line, backtrace, context }) => {
     let [sourceFile, sourceLine] = [file, line];
-    let backtrace = err && err.stack;
 
     if (!sourceFile && !sourceLine) {
       const stack = traceError();
       sourceFile = stack.file || 'unknown';
       sourceLine = stack.line || 0;
       if (!backtrace) {
-        backtrace = stack.backtrace || 'unknown';
+        backtrace = stack.backtrace || 'unknown'; // eslint-disable-line no-param-reassign
       }
     }
 
@@ -110,7 +109,12 @@ class Logger {
   };
 
   _handleOnError = (message, file, line, col, err) =>
-    this._logger(LEVEL_ERROR)(message, file, line, col, err);
+    this._logger(LEVEL_ERROR, {
+      message,
+      file,
+      line,
+      backtrace: err && err.stack
+    });
 
   changeLocation(location) {
     this._config.location = location;
@@ -120,34 +124,18 @@ class Logger {
     this._config.locale = locale;
   }
 
-  info = (message, context) =>
-    this._logger(LEVEL_INFO)(message, null, null, null, null, context);
+  info = (message, context) => this._logger(LEVEL_INFO, { message, context });
 
-  debug = (message, context) =>
-    this._logger(LEVEL_DEBUG)(message, null, null, null, null, context);
+  debug = (message, context) => this._logger(LEVEL_DEBUG, { message, context });
 
   warning = (message, context) =>
-    this._logger(LEVEL_WARNING)(message, null, null, null, null, context);
+    this._logger(LEVEL_WARNING, { message, context });
 
-  error = (message, context, errStack) =>
-    this._logger(LEVEL_ERROR)(
-      message,
-      null,
-      null,
-      null,
-      { stack: errStack },
-      context
-    );
+  error = (message, context, backtrace) =>
+    this._logger(LEVEL_ERROR, { message, backtrace, context });
 
-  fatal = (message, context, errStack) =>
-    this._logger(LEVEL_FATAL)(
-      message,
-      null,
-      null,
-      null,
-      { stack: errStack },
-      context
-    );
+  fatal = (message, context, backtrace) =>
+    this._logger(LEVEL_FATAL, { message, backtrace, context });
 }
 
 export default Logger;
