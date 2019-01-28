@@ -13,7 +13,8 @@ const defaultConfig = {
   locale: null,
   location: null,
   environment: null,
-  platform: null
+  platform: null,
+  clientId: null
 };
 
 class Logger {
@@ -99,11 +100,13 @@ class Logger {
         location: this._config.location,
         environment: this._config.environment,
         platform: this._config.platform,
-        agent: navigator && navigator.userAgent
+        agent: navigator && navigator.userAgent,
+        ...(this._config.clientId && { 'client-id': this._config.clientId })
       },
       backtrace
     };
 
+    // non-blocking call
     this._post(data);
     return true;
   };
@@ -122,6 +125,10 @@ class Logger {
 
   changeLocale(locale) {
     this._config.locale = locale;
+  }
+
+  changeClientId(id) {
+    this._config.clientId = id;
   }
 
   info = (message, context) => this._logger(LEVEL_INFO, { message, context });

@@ -14,7 +14,7 @@
     "test-coverage": "jest --coverage",
     "coveralls": "jest --coverage --coverageReporters=text-lcov | coveralls",
     "lint": "eslint --fix \"src/**/*.js\"",
-    "precommit": "npm run prepare && lint-staged"
+    "precommit": "lint-staged"
   },
   "author": "Andrew Mok <andrew.mok@lalamove.com>",
   "license": "MIT",
@@ -56,6 +56,5 @@
       "eslint --fix",
       "git add"
     ]
-  },
-  "dependencies": {}
+  }
 }
