@@ -95,6 +95,11 @@ Change locale in config.
 ```javascript
 log.changeLocale('zh_TW');
 ```
+#### changeClientId()
+Change client id in config.
+```javascript
+log.changeClientId('20');
+```
 #### info()
 Custom info log.
 ```javascript
