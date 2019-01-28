@@ -43,8 +43,8 @@ describe('lalamove-web-logger tests', () => {
 
     test('login as clientId 20', () => {
       const log = new Logger(config);
-      log.changeClientId(20);
-      expect(log._config.clientId).toBe(20);
+      log.changeClientId('20');
+      expect(log._config.clientId).toBe('20');
     });
 
     test('logout', () => {
@@ -159,7 +159,7 @@ describe('lalamove-web-logger tests', () => {
     test('should return 200', async () => {
       const log = new Logger({
         ...config,
-        clientId: 20
+        clientId: '20'
       });
       const { status } = await log._post();
       expect(status).toEqual(200);
