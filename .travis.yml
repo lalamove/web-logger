@@ -1,7 +1,7 @@
 language: node_js
 sudo: false
 node_js:
-  - 8
+- 8
 cache:
   directories:
   - node_modules
@@ -11,3 +11,11 @@ install:
 - npm install
 script:
 - npm run coveralls
+deploy:
+  provider: npm
+  email: "hello@andrewmmc.com"
+  skip_cleanup: true
+  api_key: $NPM_PUBLISH_TOKEN
+  on:
+    branch: master
+    tags: true
