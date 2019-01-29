@@ -101,6 +101,7 @@ class Logger {
         environment: this._config.environment,
         platform: this._config.platform,
         agent: navigator && navigator.userAgent,
+        url: window.location && window.location.href,
         ...(this._config.clientId && { 'client-id': this._config.clientId })
       },
       backtrace
