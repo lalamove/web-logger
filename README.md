@@ -1,6 +1,6 @@
 # lalamove-web-logger [![Build Status](https://travis-ci.org/andrewmmc/lalamove-web-logger.svg?branch=master)](https://travis-ci.org/andrewmmc/lalamove-web-logger) [![Coverage Status](https://coveralls.io/repos/github/andrewmmc/lalamove-web-logger/badge.svg?branch=master&service=github)](https://coveralls.io/github/andrewmmc/lalamove-web-logger?branch=master)
 
-v0.6.0
+v0.7.0
 
 A logger Javascript SDK to send client side errors or logs to custom logging services, based on Lalamove's log format.
 
@@ -24,7 +24,8 @@ const log = new Logger({
     locale: 'zh_HK', // required
     location: 'HK_HKG', // required
     environment: 'test', // Environment, required
-    platform: 'webapp' // required
+    platform: 'webapp', // required
+    appType: 'user' // required
 });
 
 export default log;
@@ -76,7 +77,8 @@ var log = new Logger({
     locale: 'zh_HK', // required
     location: 'HK_HKG', // required
     environment: 'test', // Environment, required
-    platform: 'webapp' // required
+    platform: 'webapp', // required
+    appType: 'user' // required
 });
 
 // Custom log message
@@ -162,8 +164,9 @@ The output of the log will be posted to the logging services in the JSON format 
         "locale": "",
         "location": "",
         "platform": "",
+        "app_type": "",
         "release": "",
-        "client-id": "",
+        "client_id": "",
         "url": "", // window.location.href
         // Destructuring custom context here
     },

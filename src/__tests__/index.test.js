@@ -9,6 +9,7 @@ const config = {
   location: 'HK_HKG',
   environment: 'dev',
   platform: 'webapp',
+  appType: 'user',
   clientId: null
 };
 
