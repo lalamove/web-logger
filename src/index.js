@@ -14,7 +14,8 @@ const defaultConfig = {
   location: null,
   environment: null,
   platform: null,
-  clientId: null
+  clientId: null,
+  appType: null
 };
 
 class Logger {
@@ -26,7 +27,8 @@ class Logger {
       !config.locale ||
       !config.location ||
       !config.environment ||
-      !config.platform
+      !config.platform ||
+      !config.appType
     ) {
       throw new Error(
         '[lalamove-web-logger] Missing configuration. Please check documentation' +
@@ -100,9 +102,10 @@ class Logger {
         location: this._config.location,
         environment: this._config.environment,
         platform: this._config.platform,
+        app_type: this._config.appType,
         agent: navigator && navigator.userAgent,
         url: window.location && window.location.href,
-        ...(this._config.clientId && { 'client-id': this._config.clientId })
+        ...(this._config.clientId && { client_id: this._config.clientId })
       },
       backtrace
     };
