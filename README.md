@@ -1,6 +1,6 @@
 # lalamove-web-logger [![Build Status](https://travis-ci.org/andrewmmc/lalamove-web-logger.svg?branch=master)](https://travis-ci.org/andrewmmc/lalamove-web-logger) [![Coverage Status](https://coveralls.io/repos/github/andrewmmc/lalamove-web-logger/badge.svg?branch=master&service=github)](https://coveralls.io/github/andrewmmc/lalamove-web-logger?branch=master)
 
-v0.7.0
+v0.8.0
 
 A logger Javascript SDK to send client side errors or logs to custom logging services, based on Lalamove's log format.
 
@@ -16,7 +16,7 @@ Create a file to init the logger:
 import Logger from 'lalamove-web-logger';
 
 // Init config
-// Will auto catch window.onerror to logging services after init
+// Will auto catch window.onerror to logging services after init, in `fatal` level
 const log = new Logger({
     url: 'https://log.dev.lalamove.com', // Logging services URL, required
     key: 'API_KEY', // Credential key, required
