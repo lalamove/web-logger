@@ -116,7 +116,7 @@ class Logger {
   };
 
   _handleOnError = (message, file, line, col, err) =>
-    this._logger(LEVEL_ERROR, {
+    this._logger(LEVEL_FATAL, {
       message,
       file,
       line,

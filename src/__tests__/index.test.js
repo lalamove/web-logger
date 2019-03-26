@@ -137,7 +137,7 @@ describe('lalamove-web-logger tests', () => {
       const result = window.onerror('error message', 'index.js', 1, 1, {
         stack: 'track stack'
       });
-      expect(console.error).toHaveBeenCalledWith('[error] error message');
+      expect(console.error).toHaveBeenCalledWith('[fatal] error message');
       expect(console.error).toHaveBeenCalledTimes(1);
       expect(result).toBe(true);
     });
