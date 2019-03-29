@@ -87,6 +87,13 @@ log.info('testing message');
 ```
 
 ## API
+#### changeLogLevels()
+Updates the log levels to call or suppress. Accepts an array of strings. Levels that are not included will be suppressed and not logged.
+During initialization, all five levels are included (debug, info, warning, error, fatal).
+```javascript
+const defaultLevels = ['debug', 'info', 'warning', 'error', 'fatal'];
+log.changeLogLevels(['info', 'warning', 'error', 'fatal']); // will suppress log.debug()
+```
 #### changeLocation()
 Change location in config.
 ```javascript
