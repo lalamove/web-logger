@@ -15,7 +15,8 @@ const defaultConfig = {
   environment: null,
   platform: null,
   clientId: null,
-  appType: null
+  appType: null,
+  levels: [LEVEL_INFO, LEVEL_DEBUG, LEVEL_WARNING, LEVEL_ERROR, LEVEL_FATAL]
 };
 
 class Logger {
@@ -36,6 +37,7 @@ class Logger {
       );
     }
     this._config = config;
+    this._config.levels = defaultConfig.levels;
     window.onerror = this._handleOnError;
   }
 
@@ -135,17 +137,28 @@ class Logger {
     this._config.clientId = id;
   }
 
-  info = (message, context) => this._logger(LEVEL_INFO, { message, context });
+  changeLogLevels(levels) {
+    this._config.levels = levels.map(r => r.toLowerCase());
+  }
 
-  debug = (message, context) => this._logger(LEVEL_DEBUG, { message, context });
+  info = (message, context) =>
+    this._config.levels.includes(LEVEL_INFO) &&
+    this._logger(LEVEL_INFO, { message, context });
+
+  debug = (message, context) =>
+    this._config.levels.includes(LEVEL_DEBUG) &&
+    this._logger(LEVEL_DEBUG, { message, context });
 
   warning = (message, context) =>
+    this._config.levels.includes(LEVEL_WARNING) &&
     this._logger(LEVEL_WARNING, { message, context });
 
   error = (message, context, backtrace) =>
+    this._config.levels.includes(LEVEL_ERROR) &&
     this._logger(LEVEL_ERROR, { message, backtrace, context });
 
   fatal = (message, context, backtrace) =>
+    this._config.levels.includes(LEVEL_FATAL) &&
     this._logger(LEVEL_FATAL, { message, backtrace, context });
 }
 

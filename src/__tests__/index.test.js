@@ -156,6 +156,101 @@ describe('lalamove-web-logger tests', () => {
     });
   });
 
+  describe('log levels', () => {
+    beforeEach(() => {
+      console.log = jest.fn();
+      console.warn = jest.fn();
+      console.error = jest.fn();
+    });
+
+    test('levels should be initialized when constructed', () => {
+      const log = new Logger(config);
+      const logLevels = log._config.levels;
+      expect(logLevels).toEqual(['info', 'debug', 'warning', 'error', 'fatal']);
+    });
+
+    test('changeLogLevel should change _config and lowercase the input', () => {
+      const log = new Logger(config);
+      log.changeLogLevels(['INFO', 'Debug', 'ERRor', 'FATAL']);
+      const logLevels = log._config.levels;
+      expect(logLevels).toEqual(['info', 'debug', 'error', 'fatal']);
+    });
+
+    test('should log all five levels when initialized without calling changeLogLevel', () => {
+      const log = new Logger(config);
+      let result = log.debug('debug message');
+      expect(console.log).toHaveBeenCalledWith('[debug] debug message');
+      expect(console.log).toHaveBeenCalledTimes(1);
+      expect(result).toBe(true);
+
+      result = log.info('info message');
+      expect(console.log).toHaveBeenCalledWith('[info] info message');
+      expect(console.log).toHaveBeenCalledTimes(2);
+      expect(result).toBe(true);
+
+      result = log.warning('warning message');
+      expect(console.warn).toHaveBeenCalledWith('[warning] warning message');
+      expect(console.warn).toHaveBeenCalledTimes(1);
+      expect(result).toBe(true);
+
+      result = log.error('error message');
+      expect(console.error).toHaveBeenCalledWith('[error] error message');
+      expect(console.error).toHaveBeenCalledTimes(1);
+      expect(result).toBe(true);
+
+      result = log.fatal('fatal message');
+      expect(console.error).toHaveBeenCalledWith('[fatal] fatal message');
+      expect(console.error).toHaveBeenCalledTimes(2);
+      expect(result).toBe(true);
+    });
+
+    test('should not log debug when debug is not set on the levels', () => {
+      const log = new Logger(config);
+      log.changeLogLevels(['fatal']);
+      const result = log.debug('debug message');
+      expect(console.log).toHaveBeenCalledTimes(0);
+      expect(result).toBe(false);
+    });
+
+    test('should not log info when info is not set on the levels', () => {
+      const log = new Logger(config);
+      log.changeLogLevels(['fatal']);
+      const result = log.info('info message');
+      expect(console.log).toHaveBeenCalledTimes(0);
+      expect(result).toBe(false);
+    });
+
+    test('should not log warning when warning is not set on the levels', () => {
+      const log = new Logger(config);
+      log.changeLogLevels(['fatal']);
+      const result = log.warning('warning message');
+      expect(console.warn).toHaveBeenCalledTimes(0);
+      expect(result).toBe(false);
+    });
+
+    test('should not log error when error is not set on the levels', () => {
+      const log = new Logger(config);
+      log.changeLogLevels(['fatal']);
+      const result = log.error('error message');
+      expect(console.error).toHaveBeenCalledTimes(0);
+      expect(result).toBe(false);
+    });
+
+    test('should not log fatal when fatal is not set on the levels', () => {
+      const log = new Logger(config);
+      log.changeLogLevels(['debug']);
+      const result = log.fatal('fatal message');
+      expect(console.error).toHaveBeenCalledTimes(0);
+      expect(result).toBe(false);
+    });
+
+    afterEach(() => {
+      console.log.mockClear();
+      console.warn.mockClear();
+      console.error.mockClear();
+    });
+  });
+
   describe('post to logging services', () => {
     test('should return 200', async () => {
       const log = new Logger({
