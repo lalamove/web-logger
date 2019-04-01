@@ -1,7 +1,4 @@
 # lalamove-web-logger [![Build Status](https://travis-ci.org/andrewmmc/lalamove-web-logger.svg?branch=master)](https://travis-ci.org/andrewmmc/lalamove-web-logger) [![Coverage Status](https://coveralls.io/repos/github/andrewmmc/lalamove-web-logger/badge.svg?branch=master&service=github)](https://coveralls.io/github/andrewmmc/lalamove-web-logger?branch=master)
-
-v0.8.0
-
 A logger Javascript SDK to send client side errors or logs to custom logging services, based on Lalamove's log format.
 
 ## Install
