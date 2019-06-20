@@ -91,6 +91,11 @@ During initialization, all five levels are included (debug, info, warning, error
 const defaultLevels = ['debug', 'info', 'warning', 'error', 'fatal'];
 log.changeLogLevels(['info', 'warning', 'error', 'fatal']); // will suppress log.debug()
 ```
+#### changeUrl()
+Change URL in config.
+```javascript
+log.changeUrl('https://log.test.lalamove.com');
+```
 #### changeLocation()
 Change location in config.
 ```javascript

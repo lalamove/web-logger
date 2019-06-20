@@ -125,6 +125,10 @@ class Logger {
       backtrace: err && err.stack
     });
 
+  changeUrl(url) {
+    this._config.url = url;
+  }
+
   changeLocation(location) {
     this._config.location = location;
   }

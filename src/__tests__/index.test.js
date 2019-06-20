@@ -275,6 +275,14 @@ describe('lalamove-web-logger tests', () => {
     });
   });
 
+  describe('change url', () => {
+    test('should change the url to TW_TPE', () => {
+      const log = new Logger(config);
+      log.changeUrl('https://log.sg.dev.lalamove.com');
+      expect(log._config.url).toBe('https://log.sg.dev.lalamove.com');
+    });
+  });
+
   describe('initialized Logger without config', () => {
     test('expected error to be throw', () => {
       expect(() => {
