@@ -1,16 +1,16 @@
-# lalamove-web-logger [![Build Status](https://travis-ci.org/andrewmmc/lalamove-web-logger.svg?branch=master)](https://travis-ci.org/andrewmmc/lalamove-web-logger) [![Coverage Status](https://coveralls.io/repos/github/andrewmmc/lalamove-web-logger/badge.svg?branch=master&service=github)](https://coveralls.io/github/andrewmmc/lalamove-web-logger?branch=master)
+# @lalamove/web-logger [![Build Status](https://travis-ci.org/andrewmmc/lalamove-web-logger.svg?branch=master)](https://travis-ci.org/andrewmmc/lalamove-web-logger) [![Coverage Status](https://coveralls.io/repos/github/andrewmmc/lalamove-web-logger/badge.svg?branch=master&service=github)](https://coveralls.io/github/andrewmmc/lalamove-web-logger?branch=master)
 A logger Javascript SDK to send client side errors or logs to custom logging services, based on Lalamove's log format.
 
 ## Install
 ```bash
-yarn add lalamove-web-logger
+yarn add @lalamove/web-logger
 ```
 
 ## Usage
 ### Modules
 Create a file to init the logger:
 ```javascript
-import Logger from 'lalamove-web-logger';
+import Logger from '@lalamove/web-logger';
 
 // Init config
 // Will auto catch window.onerror to logging services after init, in `fatal` level
@@ -61,9 +61,9 @@ Then you can use it as a regular component:
 ```
 
 ### Old-school way
-Your application should get the build from `node_modules/lalamove-web-logger/index.iife.js` (after `yarn`), and add it in the `<head>`.
+Your application should get the build from `node_modules/@lalamove/web-logger/index.iife.js` (after `yarn`), and add it in the `<head>`.
 ```html
-<script src="node_modules/lalamove-web-logger/index.iife.js"></script>
+<script src="node_modules/@lalamove/web-logger/index.iife.js"></script>
 <script>
 // Init config
 // Will auto catch window.onerror to logging services after init

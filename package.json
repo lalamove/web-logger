@@ -1,5 +1,5 @@
 {
-  "name": "lalamove-web-logger",
+  "name": "@lalamove/web-logger",
   "version": "0.10.0",
   "description": "A logger Javascript SDK for Lalamove web project.",
   "main": "dist/index.js",
